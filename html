@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+        }
+        button {
+            padding: 10px;
+            width: 18%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            background-color: #fff;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+        }
+        li.completed {
+            text-decoration: line-through;
+            background-color: #d3ffd3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>To-Do List</h2>
+        <input type="text" id="todo-input" placeholder="Enter a task">
+        <button id="add-task-btn">Add Task</button>
+        <ul id="task-list"></ul>
+    </div>
+
+    <script>
+        const addTaskButton = document.getElementById('add-task-btn');
+        const todoInput = document.getElementById('todo-input');
+        const taskList = document.getElementById('task-list');
+
+        addTaskButton.addEventListener('click', () => {
+            if (todoInput.value.trim() === '') {
+                return;
+            }
+
+            const newTask = document.createElement('li');
+            newTask.textContent = todoInput.value.trim();
+            taskList.appendChild(newTask);
+
+            // Add functionality to mark the task as completed
+            newTask.addEventListener('click', () => {
+                newTask.classList.toggle('completed');
+            });
+
+            // Add functionality to delete a task
+            newTask.addEventListener('dblclick', () => {
+                taskList.removeChild(newTask);
+            });
+
+            todoInput.value = ''; // Clear input field
+        });
+    </script>
+
+</body>
+</html>
